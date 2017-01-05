@@ -1,13 +1,15 @@
 import os
 import sys
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
+if __name__ == "__main__":
+    apps = sys.argv[1:]
 
-from django.core import management
-
-apps = sys.argv[1:]
-
-if not apps:
+    if not apps:
         apps = ['tests']
 
-management.call_command('test', *apps, interactive=False)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
+
+    from django.core.management import execute_from_command_line
+    from django.core.management import call_command
+
+    execute_from_command_line(['manage.py', 'test', 'tests'])
