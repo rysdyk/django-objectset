@@ -8,7 +8,7 @@ except ImportError:
                                'installed to use the resource classes')
 
 from functools import partial
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.db.models import FieldDoesNotExist
@@ -379,9 +379,7 @@ def get_url_patterns(Model, resources=None, prefix=''):
     if prefix and not prefix.endswith('/'):
         prefix = prefix + '/'
 
-    return patterns(
-        '',
-
+    return [
         url(r'^{0}$'.format(prefix),
             resources['sets'](), name=url_names['sets']),
 
@@ -390,4 +388,4 @@ def get_url_patterns(Model, resources=None, prefix=''):
 
         url(r'^{0}(?P<pk>\d+)/objects/$'.format(prefix),
             resources['objects'](), name=url_names['objects']),
-    )
+    ]
