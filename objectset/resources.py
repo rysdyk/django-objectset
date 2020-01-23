@@ -10,7 +10,7 @@ except ImportError:
 from functools import partial
 from django.conf.urls import url
 from django.http import HttpResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import FieldDoesNotExist
 from restlib2.resources import Resource
 from restlib2.http import codes
